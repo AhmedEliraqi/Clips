@@ -1,0 +1,51 @@
+<!-- Login Form -->
+<form #LoginForm="ngForm" (ngSubmit)="login()">
+  <app-alert *ngIf="showalert" [color]="bgColor">{{ alertMsg }}</app-alert>
+  <!-- Email -->
+  <div class="mb-3">
+    <label class="inline-block mb-2">Email</label>
+    <!--[(ngModel)] Listen to events and updating values -->
+    <input
+      name="email"
+      #email="ngModel"
+      [(ngModel)]="credentials.email"
+      type="email"
+      class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+      placeholder="Enter Email"
+      required
+      pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+    />
+  </div>
+  <p *ngIf="email.errors && email.touched && email.dirty" class="text-red-400">
+    Email is Invalid , email must be in lowercase
+  </p>
+  <!-- Password -->
+
+  <div class="mb-3">
+    <label class="inline-block mb-2">Password</label>
+    <input
+      type="password"
+      name="password"
+      [(ngModel)]="credentials.password"
+      #password="ngModel"
+      class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+      placeholder="Password"
+      required
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+    />
+  </div>
+  <p
+    *ngIf="password.errors && password.touched && password.dirty"
+    class="text-red-400"
+  >
+    - at least 8 characters - must contain at least 1 uppercase letter, 1
+    lowercase letter, and 1 number
+  </p>
+  <button
+    [disabled]="LoginForm.invalid || Insubmission"
+    type="submit"
+    class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition hover:bg-indigo-500 disabled:opacity-50 disabled:bg-indigo-400"
+  >
+    Submit
+  </button>
+</form>

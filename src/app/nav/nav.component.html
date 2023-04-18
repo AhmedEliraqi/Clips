@@ -1,0 +1,52 @@
+<!-- Header -->
+<header id="header" class="bg-secondary">
+  <nav class="container mx-auto flex justify-start items-center py-8 px-4">
+    <!-- App Name -->
+    <a class="text-3xl text-indigo-400 font-bold uppercase mr-4" routerLink="/"
+      >Clipz</a
+    >
+
+    <div class="flex flex-grow items-center">
+      <!-- Primary Navigation -->
+      <ul class="flex flex-row mt-1">
+        <!-- Navigation Links -->
+        <li *ngIf="!(Auth.IsAuthicated$ | async); else AuthLinks">
+          <a class="px-2" href="#" (click)="openModal($event)">
+            Login / Register</a
+          >
+        </li>
+
+        <ng-template #AuthLinks routerLinkActive="text-indigo-400">
+          <li>
+            <a
+              class="px-2"
+              routerLink="/manage"
+              routerLinkActive="text-indigo-400"
+              [routerLinkActiveOptions]="{ exact: true }"
+              [queryParams]="{ sort: '3' }"
+              >Manage</a
+            >
+          </li>
+          <li>
+            <a
+              class="px-2"
+              routerLink="/upload"
+              routerLinkActive="text-indigo-400"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Upload</a
+            >
+          </li>
+          <li>
+            <a class="px-2" href="#" (click)="Auth.logout($event)">Logout</a>
+          </li>
+        </ng-template>
+        <li routerLinkActive="text-indigo-400">
+          <a class="px-2" routerLink="/about" routerLinkActive="text-indigo-400"
+            >About</a
+          >
+        </li>
+      </ul>
+    
+    </div>
+  </nav>
+</header>
